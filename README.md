@@ -69,6 +69,5 @@ To install Extreme Agriculture, simply clone the repository to your local machin
     ```bash
     git clone https://github.com/HumbertoBM2/Extreme-agriculture.git
     ```
-
 Then, follow the usage instructions mentioned above.
 
