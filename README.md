@@ -66,8 +66,9 @@ Before running the game, ensure you have the following:
 
 To install Extreme Agriculture, simply clone the repository to your local machine:
 
-    ```bash
-    git clone https://github.com/HumbertoBM2/Extreme-agriculture.git
-    ```
+```bash
+git clone https://github.com/HumbertoBM2/Extreme-agriculture
+```
+
 Then, follow the usage instructions mentioned above.
 
