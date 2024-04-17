@@ -10,7 +10,7 @@
 ![Static Badge](https://img.shields.io/badge/VHDL-black?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/Intel%20FPGA-blue?style=for-the-badge&logo=intel)
 ![Static Badge](https://img.shields.io/badge/Godot-478CBF?style=for-the-badge&logo=GodotEngine&logoColor=white)
-
+![Static Badge](https://img.shields.io/badge/Assembly-gray?style=for-the-badge&logo=Assembly)
 
 
 </div>
@@ -43,6 +43,7 @@ The repository includes the following files:
 
 - Godot game files.
 - VHDL codes used to program the FPGA.
+- Assembly codes used for the Gumnut softcore microprocessor.
 
 ## Usage 
 
