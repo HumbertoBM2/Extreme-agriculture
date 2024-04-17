@@ -59,7 +59,7 @@ To play Extreme Agriculture, follow these steps:
 Before running the game, ensure you have the following:
 
 - [Git](https://git-scm.com/)
-- DE10-Lite FPGA module.
+- [DE10-Lite FPGA module.](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&No=1021)
 - [Intel Quartus for programming the FPGA.](https://www.intel.com/content/www/us/en/software-kit/660907/intel-quartus-prime-lite-edition-design-software-version-20-1-1-for-windows.html).
 - [Godot Engine for running the game.](https://godotengine.org/)
 
