@@ -78,7 +78,10 @@ Then, follow the usage instructions mentioned above.
 
 ### Demo
 
+https://github.com/HumbertoBM2/Extreme-agriculture/assets/117108901/ea121697-e058-482a-9e62-c788e370f47c
+
 
 ### RTL
 
-<img src=RTLDiagram.jpg style="width:25%; height:25%;">
+![RTL](RTLDiagram.jpg)
+
