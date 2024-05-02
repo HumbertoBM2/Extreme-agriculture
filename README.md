@@ -73,3 +73,12 @@ git clone https://github.com/HumbertoBM2/Extreme-agriculture
 
 Then, follow the usage instructions mentioned above.
 
+
+## Media
+
+### Demo
+
+
+### RTL
+
+<img src=RTLDiagram.jpg style="width:25%; height:25%;">
