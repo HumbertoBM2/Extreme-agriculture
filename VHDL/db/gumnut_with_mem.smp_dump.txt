@@ -1,0 +1,20 @@
+
+State Machine - |de10lite|accel_driver:accel|STATE
+Name STATE.S_OUTPUT STATE.S_CALIBRATE STATE.S_READ_WAIT STATE.S_READ STATE.S_WRITE STATE.S_CONFIG STATE.S_IDLE STATE.S_START 
+STATE.S_START 0 0 0 0 0 0 0 0 
+STATE.S_IDLE 0 0 0 0 0 0 1 1 
+STATE.S_CONFIG 0 0 0 0 0 1 0 1 
+STATE.S_WRITE 0 0 0 0 1 0 0 1 
+STATE.S_READ 0 0 0 1 0 0 0 1 
+STATE.S_READ_WAIT 0 0 1 0 0 0 0 1 
+STATE.S_CALIBRATE 0 1 0 0 0 0 0 1 
+STATE.S_OUTPUT 1 0 0 0 0 0 0 1 
+
+State Machine - |de10lite|gumnut_with_mem:gumnut|gumnut:core|state
+Name state.int_state state.write_back_state state.mem_state state.execute_state state.decode_state state.fetch_state 
+state.fetch_state 0 0 0 0 0 0 
+state.decode_state 0 0 0 0 1 1 
+state.execute_state 0 0 0 1 0 1 
+state.mem_state 0 0 1 0 0 1 
+state.write_back_state 0 1 0 0 0 1 
+state.int_state 1 0 0 0 0 1 

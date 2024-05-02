@@ -1,0 +1,18 @@
+text
+org 0x000
+ldm r4, 0
+ldm r3, 0
+ldm r2, 0
+ldm r1, 0
+jmp main
+
+data
+uart_rx: bss1
+vhdl_tx: bss1
+
+text
+org 0x010
+main:
+	inp r1, uart_rx
+	out r1, vhdl_tx
+	jmp main

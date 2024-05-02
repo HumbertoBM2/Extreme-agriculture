@@ -1,0 +1,138 @@
+[gd_scene load_steps=15 format=3 uid="uid://bl0pg1nfktnrt"]
+
+[ext_resource type="PackedScene" uid="uid://wgb03jruiavx" path="res://ground_tiles.tscn" id="1_54pa1"]
+[ext_resource type="PackedScene" uid="uid://d0c6sc037co4a" path="res:// tractor.tscn" id="2_6lixw"]
+[ext_resource type="Script" path="res://name_explanation.gd" id="2_aeu2c"]
+[ext_resource type="Texture2D" uid="uid://xaebgw087ehi" path="res://cloudy3.jpg" id="2_kkqtk"]
+[ext_resource type="PackedScene" uid="uid://rtb2lol7apgs" path="res://titletiles.tscn" id="3_1u0cj"]
+[ext_resource type="Script" path="res://Camera2D.gd" id="3_r4c14"]
+[ext_resource type="PackedScene" uid="uid://dal32d7ja8qjd" path="res://overlay.tscn" id="4_j6yuv"]
+[ext_resource type="Script" path="res://serial.cs" id="4_kapow"]
+[ext_resource type="Script" path="res://title_tiles.gd" id="5_p0o0c"]
+[ext_resource type="Script" path="res://TitleCamera.gd" id="6_fsp7x"]
+[ext_resource type="Script" path="res://VBoxContainer.gd" id="7_2rh5g"]
+[ext_resource type="AudioStream" uid="uid://40ipof46xvw2" path="res://sounds/shoot.wav" id="12_jnemw"]
+[ext_resource type="AudioStream" uid="uid://1mjgbh1dmqex" path="res://sounds/hit.wav" id="13_esejh"]
+
+[sub_resource type="Theme" id="Theme_c4phc"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/font_sizes/font_size = 24
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 0
+offset_left = 257.0
+offset_top = 169.0
+offset_right = 881.0
+offset_bottom = 488.0
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+alignment = 1
+script = ExtResource("7_2rh5g")
+
+[node name="StartButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="CreditsButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = 428.0
+offset_top = -46.0
+offset_right = 674.0
+offset_bottom = -12.0
+size_flags_horizontal = 4
+theme = SubResource("Theme_c4phc")
+text = "(Extreme Agriculture)"
+script = ExtResource("2_aeu2c")
+
+[node name="GroundTiles" parent="." instance=ExtResource("1_54pa1")]
+position = Vector2(-3.57, 900)
+
+[node name="Tractor" parent="GroundTiles" instance=ExtResource("2_6lixw")]
+position = Vector2(-47.215, -379)
+scale = Vector2(0.5, 0.5)
+
+[node name="Overlay" parent="GroundTiles/Tractor" instance=ExtResource("4_j6yuv")]
+visible = false
+z_index = 2
+z_as_relative = false
+offset_left = -950.537
+offset_top = -1668.75
+offset_right = 700.463
+offset_bottom = -745.75
+auto_translate = false
+mouse_filter = 2
+
+[node name="TractorCamera" type="Camera2D" parent="GroundTiles/Tractor"]
+position = Vector2(158, -116)
+scale = Vector2(1.25, 1.25)
+zoom = Vector2(0.7, 0.7)
+script = ExtResource("3_r4c14")
+
+[node name="Serial" type="Node2D" parent="GroundTiles"]
+script = ExtResource("4_kapow")
+
+[node name="TitleTiles" parent="." instance=ExtResource("3_1u0cj")]
+position = Vector2(2.08165e-12, 2.08165e-12)
+script = ExtResource("5_p0o0c")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -1873.0
+offset_top = -1435.0
+offset_right = 2005.0
+offset_bottom = 1994.0
+rotation = 5.77227e-05
+texture = ExtResource("2_kkqtk")
+stretch_mode = 1
+
+[node name="TitleCamera" type="Camera2D" parent="."]
+position = Vector2(60, 26)
+zoom = Vector2(0.7, 0.7)
+script = ExtResource("6_fsp7x")
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_jnemw")
+volume_db = -8.0
+max_polyphony = 5
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_esejh")
+max_polyphony = 5
+
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="Control/MarginContainer/VBoxContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="Control/Label" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="GroundTiles" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="GroundTiles/Tractor" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="GroundTiles/Tractor/TractorCamera" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="GroundTiles/Serial" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="TitleTiles" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/StartButton" to="TitleCamera" method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/ExitButton" to="Control/MarginContainer/VBoxContainer" method="_on_exit_button_pressed"]

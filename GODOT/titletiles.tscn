@@ -1,0 +1,139 @@
+[gd_scene load_steps=5 format=3 uid="uid://rtb2lol7apgs"]
+
+[ext_resource type="Texture2D" uid="uid://bi32ty7mvb24" path="res://tileset.png" id="1_61ucc"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7cof5"]
+texture = ExtResource("1_61ucc")
+texture_region_size = Vector2i(32, 40)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+4:1/0 = 0
+4:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:1/0/physics_layer_0/angular_velocity = 0.0
+3:2/0 = 0
+3:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:2/0/physics_layer_0/angular_velocity = 0.0
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+2:3/0 = 0
+2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:3/0/physics_layer_0/angular_velocity = 0.0
+3:3/0 = 0
+3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:3/0/physics_layer_0/angular_velocity = 0.0
+4:3/0 = 0
+4:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:3/0/physics_layer_0/angular_velocity = 0.0
+2:2/0 = 0
+2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+4:2/0 = 0
+4:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:2/0/physics_layer_0/angular_velocity = 0.0
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 16, 0, 0, 8, -16, 0)
+5:0/animation_columns = 4
+5:0/animation_frame_0/duration = 0.2
+5:0/animation_frame_1/duration = 0.2
+5:0/animation_frame_2/duration = 0.2
+5:0/animation_frame_3/duration = 0.2
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_auspg"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+physics_layer_0/collision_layer = 1
+sources/4 = SubResource("TileSetAtlasSource_7cof5")
+
+[sub_resource type="GDScript" id="GDScript_ngksi"]
+script/source = "extends TileMap
+
+const boundary_atlas_pos = Vector2i(0, 3)
+const rocket_atlas_pos = Vector2i(5, 0)
+const main_source = 4
+
+var tween : Tween
+
+func _ready() -> void:
+	place_boundaries()
+
+func place_boundaries():
+	var offsets = [
+		Vector2i(0, -1),
+		Vector2i(0, 1),
+		Vector2i(1, 0),
+		Vector2i(-1, 0),
+	]
+	
+	var used = get_used_cells(0)
+	
+	for spot in used:
+		for offset in offsets:
+			var current_spot = spot + offset
+			if get_cell_source_id(0, current_spot) == -1:
+				set_cell(0, current_spot, main_source, boundary_atlas_pos)
+				set_cell(1, spot, main_source, rocket_atlas_pos)
+
+func _process(delta):
+	pass
+
+
+func _on_start_button_pressed():
+	print(\"ground tiles\")
+	tween = create_tween()
+	
+	tween.tween_property(self, \"position:y\", -800, 4.0)
+"
+
+[node name="GroundTiles" type="TileMap"]
+y_sort_enabled = true
+texture_filter = 3
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_auspg")
+format = 2
+layer_0/name = "Ground"
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(393210, 4, 0, 720890, 65540, 0, 786426, 65540, 0, 851962, 65540, 0, -393221, 131076, 0, 65531, 131076, 0, 327675, 4, 0, 393211, 4, 0, 458747, 4, 0, 851963, 65540, 0, -458756, 131076, 0, -393220, 131076, 0, -327684, 131076, 0, -196612, 4, 0, -131076, 4, 0, -4, 131076, 0, 65532, 131076, 0, 131068, 131076, 0, 196604, 4, 0, 262140, 4, 0, 393212, 4, 0, 524284, 4, 0, 655356, 4, 0, 786428, 65540, 0, 851964, 65540, 0, -327683, 131076, 0, -262147, 4, 0, -196611, 4, 0, -131075, 4, 0, -65539, 4, 0, 131069, 131076, 0, 262141, 4, 0, 393213, 4, 0, 589821, 4, 0, 851965, 65540, 0, -458754, 131076, 0, -393218, 131076, 0, -327682, 131076, 0, -262146, 4, 0, -196610, 4, 0, -131074, 4, 0, -65538, 4, 0, -2, 131076, 0, 65534, 131076, 0, 131070, 131076, 0, 262142, 4, 0, 393214, 4, 0, 524286, 4, 0, 655358, 4, 0, 720894, 65540, 0, 786430, 65540, 0, 851966, 65540, 0, -983040, 4, 0, -393216, 131076, 0, -262144, 4, 0, 196608, 65540, 0, 720896, 65540, 0, -1048575, 4, 0, -983039, 4, 0, -917503, 4, 0, -851967, 131076, 0, -786431, 131076, 0, -720895, 131076, 0, -655359, 4, 0, -524287, 4, 0, -458751, 131076, 0, -393215, 131076, 0, -327679, 131076, 0, -262143, 4, 0, -196607, 131076, 0, -65535, 131076, 0, 1, 4, 0, 65537, 4, 0, 131073, 4, 0, 262145, 131076, 0, 327681, 131076, 0, 393217, 131076, 0, 458753, 4, 0, 524289, 4, 0, 589825, 4, 0, 655361, 65540, 0, 786433, 65540, 0, -917502, 4, 0, -720894, 131076, 0, -655358, 4, 0, -524286, 4, 0, -393214, 131076, 0, -262142, 4, 0, -196606, 131076, 0, -65534, 131076, 0, 131074, 4, 0, 196610, 65540, 0, 393218, 131076, 0, 458754, 4, 0, 589826, 4, 0, 655362, 65540, 0, 720898, 65540, 0, 786434, 65540, 0, -1048573, 4, 0, -983037, 4, 0, -917501, 4, 0, -720893, 131076, 0, -655357, 4, 0, -589821, 4, 0, -524285, 4, 0, -393213, 131076, 0, -262141, 4, 0, -196605, 131076, 0, -131069, 131076, 0, -65533, 131076, 0, 3, 4, 0, 65539, 4, 0, 131075, 4, 0, 196611, 65540, 0, 393219, 131076, 0, 458755, 4, 0, 524291, 4, 0, 589827, 4, 0, 655363, 65540, 0, 786435, 65540, 0, 458756, 4, 0, 524293, 4, 0, 589829, 4, 0)
+layer_1/name = "Rockets"
+layer_1/y_sort_enabled = true
+layer_1/z_index = -1
+layer_1/tile_data = PackedInt32Array()
+script = SubResource("GDScript_ngksi")

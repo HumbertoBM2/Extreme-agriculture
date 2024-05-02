@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://72s6xqrwua5k"]
+
+[ext_resource type="Script" path="res://gameover.gd" id="1_1yo6o"]
+[ext_resource type="FontFile" uid="uid://bqt0sd2ro5uv2" path="res://Minecraft.ttf" id="1_g5p8m"]
+[ext_resource type="Texture2D" uid="uid://xaebgw087ehi" path="res://cloudy3.jpg" id="2_45br8"]
+[ext_resource type="AudioStream" uid="uid://b7g3qcisms1gp" path="res://sounds/gameover.wav" id="4_q0tu0"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1yo6o")
+
+[node name="GameOverLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -407.0
+offset_top = -224.0
+offset_right = 407.0
+offset_bottom = -104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_g5p8m")
+theme_override_font_sizes/font_size = 120
+text = "Game Over :("
+
+[node name="HighScoreLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -448.0
+offset_right = 320.0
+offset_bottom = -368.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_g5p8m")
+theme_override_font_sizes/font_size = 80
+text = "Thanks for playing"
+
+[node name="PlayAgainLabel" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -151.0
+offset_top = -128.0
+offset_right = 151.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("1_g5p8m")
+theme_override_font_sizes/font_size = 60
+text = "Play Again"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -112.0
+offset_top = -94.0
+offset_right = 1221.0
+offset_bottom = 930.0
+texture = ExtResource("2_45br8")
+stretch_mode = 1
+
+[node name="LoseSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_q0tu0")
+max_polyphony = 5
+
+[connection signal="gui_input" from="PlayAgainLabel" to="." method="_on_play_again_label_gui_input"]

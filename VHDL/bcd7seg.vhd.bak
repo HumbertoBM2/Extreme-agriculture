@@ -1,0 +1,36 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity bcd7seg is
+	port (
+		bcd	:	in std_logic_vector(3 downto 0);
+		display	:	out std_logic_vector(7 downto 0)
+	);
+end bcd7seg;
+
+architecture behaviour of bcd7seg is
+begin
+	process(bcd)
+	begin
+		case bcd is
+			-- 1 es apagado
+			-- 0 es prendido
+			when "0000" => display <= "11000000"; -- 0
+			when "0001" => display <= "11111001"; -- 1
+			when "0010" => display <= "10100100"; -- 2
+			when "0011" => display <= "10110000"; -- 3
+			when "0100" => display <= "10011001"; -- 4
+			when "0101" => display <= "10010010"; -- 5
+			when "0110" => display <= "10000010"; -- 6
+			when "0111" => display <= "11110000"; -- 7
+			when "1000" => display <= "00000000"; -- 8
+			when "1001" => display <= "10011000"; -- 9
+			when "1010" => display <= "11001000"; -- A
+			when "1011" => display <= "10000011"; -- B
+			when "1100" => display <= "11000110"; -- C
+			when "1101" => display <= "10100001"; -- D
+			when "1110" => display <= "10000110"; -- E
+			when "1111" => display <= "10001110"; -- F
+		end case;
+	end process;
+end behaviour;
